@@ -184,6 +184,7 @@ class WebServer
           return res.send 403, "Your IP (#{req.ip}) is not allowed."
         next()
     staticPath = config.staticPath ? __dirname + '/../'
+    app.use express.basicAuth(config.auth.user, config.auth.pass)  if config.auth and config.auth.user and config.auth.pass
     app.use express.static staticPath
 
   _createServer: (config, app) ->
